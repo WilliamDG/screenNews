@@ -1,6 +1,8 @@
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
 import javax.swing.JPanel;
 
 /*
@@ -18,6 +20,9 @@ public class Board extends JPanel implements Runnable {
     
     private int B_WIDTH = 800;
     private int B_HEIGHT = 600;
+    
+    private int x = 700;
+    private int y = 300;
     
     
     public Board(){
@@ -41,7 +46,37 @@ public class Board extends JPanel implements Runnable {
     
     @Override
     public void run() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        while(true){
+            move();
+            
+            try{
+                Thread.sleep(5);
+            }catch(InterruptedException ex){
+                
+            }
+            repaint();       
+        }
     }
+    
+    
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        
+        g.setColor(Color.BLACK);
+        Font f;
+        f = new Font("TimesRoman", Font.PLAIN, 40);
+        g.setFont(f);
+        g.drawString("ciao", this.x, this.y);
+    }
+    
+    
+    
+   public void move(){
+       x--;
+       
+       
+   }
+    
     
 }

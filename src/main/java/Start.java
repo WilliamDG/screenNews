@@ -39,8 +39,8 @@ public class Start extends JFrame {
         JFrame jf = new Start();
         jf.setVisible(true);
         
-        System.out.println("TEST");
-        System.out.println("TEST");
+        //System.out.println("TEST");
+        //System.out.println("TEST");
     }
     
 }
