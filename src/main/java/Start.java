@@ -17,7 +17,7 @@ public class Start {
         // TODO code application logic here
         
         System.out.println("TEST");
-        
+        System.out.println("TEST");
     }
     
 }
