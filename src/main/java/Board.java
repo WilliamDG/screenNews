@@ -65,17 +65,19 @@ public class Board extends JPanel implements Runnable {
         
         g.setColor(Color.BLACK);
         Font f;
-        f = new Font("TimesRoman", Font.PLAIN, 40);
+        f = new Font("TimesRoman", Font.PLAIN, 60);
         g.setFont(f);
-        g.drawString("ciao", this.x, this.y);
+        String a = "ciao";
+        g.drawString(a, this.x, this.y);
+        
+        int width = g.getFontMetrics().stringWidth(a);
+        System.out.println(width);
     }
     
     
     
    public void move(){
-       x--;
-       
-       
+       x--;    
    }
     
     
