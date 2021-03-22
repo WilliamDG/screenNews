@@ -53,7 +53,7 @@ public class Board extends JPanel implements Runnable {
         
         addComponentListener(new ComponentAdapter() {
             @Override
-            public void componentResized(ComponentEvent evy){
+            public void componentResized(ComponentEvent evt){
                 boardSize.setSize(getSize());
             }
         });
