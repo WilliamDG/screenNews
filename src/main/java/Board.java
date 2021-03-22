@@ -3,6 +3,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import javax.swing.JPanel;
 
 /*
@@ -16,19 +18,29 @@ import javax.swing.JPanel;
  * @author Will
  */
 public class Board extends JPanel implements Runnable {
+    private BoardSettings boardSettings;
+    
+    
     private Thread boardThread;
     
-    private int B_WIDTH = 800;
-    private int B_HEIGHT = 600;
+    private int B_WIDTH;
+    private int B_HEIGHT;
+    
+    private Dimension boardSize;
     
     private int x = 700;
     private int y = 300;
     
     
     public Board(){
+        boardSettings = new BoardSettings();
+        this.B_WIDTH = boardSettings.getB_WIDTH();
+        this.B_HEIGHT = boardSettings.getB_HEIGHT();
+        boardSize = new Dimension(this.B_WIDTH, this.B_HEIGHT);
+        
         setBackground(Color.gray);
         
-        setPreferredSize(new Dimension(B_WIDTH, B_HEIGHT));
+        setPreferredSize(boardSize);
         
         
         
@@ -37,6 +49,16 @@ public class Board extends JPanel implements Runnable {
         
         
         boardThread.start();
+        
+        
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent evy){
+                boardSize.setSize(getSize());
+            }
+        });
+        
+        
         
     }
     
@@ -50,7 +72,7 @@ public class Board extends JPanel implements Runnable {
             move();
             
             try{
-                Thread.sleep(5);
+                Thread.sleep(boardSettings.getSpeed());
             }catch(InterruptedException ex){
                 
             }
@@ -71,7 +93,7 @@ public class Board extends JPanel implements Runnable {
         g.drawString(a, this.x, this.y);
         
         int width = g.getFontMetrics().stringWidth(a);
-        System.out.println(width);
+        //System.out.println(width);
     }
     
     
