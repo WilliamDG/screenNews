@@ -1,4 +1,6 @@
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import javax.swing.JFrame;
 
 /*
@@ -11,7 +13,7 @@ import javax.swing.JFrame;
  *
  * @author Will
  */
-public class Start extends JFrame {
+public class Start extends JFrame implements KeyListener{
     
     private BoardSettings boardSettings;
     
@@ -21,7 +23,12 @@ public class Start extends JFrame {
         
         Board b = new Board(boardSettings);
         this.add(b);
-  
+        
+        
+        //For key listener
+        setFocusable(true);
+        requestFocusInWindow();
+        addKeyListener(this);
     }
     
     
@@ -39,6 +46,7 @@ public class Start extends JFrame {
         //jf.setExtendedState(JFrame.MAXIMIZED_BOTH); 
         //jf.setLocationRelativeTo(null); 
         //jf.setUndecorated(true);
+
         
         //set size for the system
         jf.pack();
@@ -47,8 +55,40 @@ public class Start extends JFrame {
         jf.setTitle("NEWS");
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
+   
         //System.out.println("TEST");
         //System.out.println("TEST");
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        if(e.getKeyCode()== KeyEvent.VK_F){
+            System.out.println("FULL SCREEN");
+            
+            this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+            //this.setLocationRelativeTo(null);
+            this.dispose();
+            this.setUndecorated(true);
+            this.setVisible(true); 
+        }
+        else if(e.getKeyCode()== KeyEvent.VK_ESCAPE){
+            System.out.println("Normal SCREEN");
+            
+            this.setExtendedState(JFrame.NORMAL); 
+            //this.setLocationRelativeTo(null);
+            this.dispose();
+            this.setUndecorated(false);
+            this.pack();
+            this.setVisible(true); 
+        }
     }
     
 }
