@@ -70,7 +70,7 @@ public class Start extends JFrame implements KeyListener{
 
     @Override
     public void keyReleased(KeyEvent e) {
-        if(e.getKeyCode()== KeyEvent.VK_F){
+        if(e.getKeyCode() == KeyEvent.VK_F){
             System.out.println("FULL SCREEN");
             
             this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
@@ -79,7 +79,7 @@ public class Start extends JFrame implements KeyListener{
             this.setUndecorated(true);
             this.setVisible(true); 
         }
-        else if(e.getKeyCode()== KeyEvent.VK_ESCAPE){
+        else if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
             System.out.println("Normal SCREEN");
             
             this.setExtendedState(JFrame.NORMAL); 
