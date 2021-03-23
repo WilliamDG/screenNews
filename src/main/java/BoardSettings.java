@@ -16,7 +16,8 @@ public class BoardSettings {
     private int B_WIDTH;
     private int B_HEIGHT;
     private Dimension boardSize;
-    private Color backgroundColor;
+    private Color backgroundColor1;
+    private Color backgroundColor2;
     private long speed;
 
     
@@ -27,7 +28,8 @@ public class BoardSettings {
         B_HEIGHT = 600;
         boardSize = new Dimension(B_WIDTH, B_HEIGHT);   
         
-        backgroundColor = Color.decode("#808080");      //or --> new Color(80, 80, 80);
+        backgroundColor1 = Color.decode("#808080");      //or --> new Color(80, 80, 80);
+        backgroundColor2 = Color.decode("#424242");      //or --> new Color(80, 80, 80);
         
         speed = 5;
     }
@@ -92,29 +94,31 @@ public class BoardSettings {
 
     
     /**
-     * @return the backgroundColor
+     * @return the backgroundColor1
      */
-    public Color getBackgroundColor() {
-        return backgroundColor;
+    public Color getBackgroundColor1() {
+        return backgroundColor1;
     }
 
     /**
-     * @param backgroundColor the backgroundColor to set
+     * @param backgroundColor1 the backgroundColor1 to set
      */
-    public void setBackgroundColor(Color backgroundColor) {
-        this.backgroundColor = backgroundColor;
+    public void setBackgroundColor1(Color backgroundColor1) {
+        this.backgroundColor1 = backgroundColor1;
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    public int getTest(){
-        return 0;
+
+    /**
+     * @return the backgroundColor2
+     */
+    public Color getBackgroundColor2() {
+        return backgroundColor2;
+    }
+
+    /**
+     * @param backgroundColor2 the backgroundColor2 to set
+     */
+    public void setBackgroundColor2(Color backgroundColor2) {
+        this.backgroundColor2 = backgroundColor2;
     }
 }
