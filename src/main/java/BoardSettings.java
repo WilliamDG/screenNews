@@ -1,3 +1,7 @@
+
+import java.awt.Color;
+import java.awt.Dimension;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,12 +13,27 @@
  * @author Will
  */
 public class BoardSettings {
-    private int B_WIDTH = 800;
-    private int B_HEIGHT = 600;
-    
-    
-    private long speed = 15;
+    private int B_WIDTH;
+    private int B_HEIGHT;
+    private Dimension boardSize;
+    private Color backgroundColor;
+    private long speed;
 
+    
+    
+    
+    public BoardSettings(){
+        B_WIDTH = 800;
+        B_HEIGHT = 600;
+        boardSize = new Dimension(B_WIDTH, B_HEIGHT);   
+        
+        backgroundColor = Color.decode("#808080");      //or --> new Color(80, 80, 80);
+        
+        speed = 15;
+    }
+    
+    
+    
     /**
      * @return the B_WIDTH
      */
@@ -55,5 +74,47 @@ public class BoardSettings {
      */
     public void setSpeed(long speed) {
         this.speed = speed;
+    }
+
+    /**
+     * @return the boardSize
+     */
+    public Dimension getBoardSize() {
+        return boardSize;
+    }
+
+    /**
+     * @param boardSize the boardSize to set
+     */
+    public void setBoardSize(Dimension boardSize) {
+        this.boardSize = boardSize;
+    }
+
+    
+    /**
+     * @return the backgroundColor
+     */
+    public Color getBackgroundColor() {
+        return backgroundColor;
+    }
+
+    /**
+     * @param backgroundColor the backgroundColor to set
+     */
+    public void setBackgroundColor(Color backgroundColor) {
+        this.backgroundColor = backgroundColor;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    public int getTest(){
+        return 0;
     }
 }

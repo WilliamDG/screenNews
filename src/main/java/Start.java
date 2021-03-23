@@ -13,16 +13,15 @@ import javax.swing.JFrame;
  */
 public class Start extends JFrame {
     
+    private BoardSettings boardSettings;
+    
     public Start(){
-        Board b = new Board();
-        add(b);
-
-        //set size for the system
-        pack();
-
-        setTitle("SCREEN");
-
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        boardSettings = new BoardSettings();
+        
+        Board b = new Board(boardSettings);
+        this.add(b);
+  
     }
     
     
@@ -37,7 +36,16 @@ public class Start extends JFrame {
         // TODO code application logic here
         
         JFrame jf = new Start();
-        jf.setVisible(true);
+        //jf.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+        //jf.setLocationRelativeTo(null); 
+        //jf.setUndecorated(true);
+        
+        //set size for the system
+        jf.pack();
+        
+        jf.setVisible(true);     
+        jf.setTitle("NEWS");
+        jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         //System.out.println("TEST");
         //System.out.println("TEST");
