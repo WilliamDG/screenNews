@@ -120,6 +120,7 @@ public class Board extends JPanel implements Runnable {
                 g.fillRect(0, newsCenter * ((i*2)+1)-newsCenter, boardSettings.getBoardSize().width, newsCenter * ((i*2)+1)+newsCenter);
             }
             
+            
             g.setColor(news.get(i).getColor());
             g.setFont(news.get(i).getFont());
             g.drawString(news.get(i).getText(), news.get(i).getX(), news.get(i).getY());
