@@ -27,9 +27,7 @@ public class News {
     private boolean end;
     
     
-    public News(String text, int x, int y, String color, String fontName, int fontStyle, int fontSize){
-        this.x = x;
-        this.y = y;
+    public News(String text, String color, String fontName, int fontStyle, int fontSize){
         this.text = text;
         
         //calcolare w e h

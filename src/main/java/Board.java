@@ -22,7 +22,7 @@ public class Board extends JPanel implements Runnable {
     private Thread boardThread;
     
     private ArrayList<News> news = new ArrayList<News>();
-   
+    private int newsNumber;
     
     
     public Board(BoardSettings bs){
@@ -40,7 +40,7 @@ public class Board extends JPanel implements Runnable {
         boardThread.start();
 
         
-        
+        //Board Size listner 
         addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent evt){
@@ -54,13 +54,34 @@ public class Board extends JPanel implements Runnable {
         
         
         
+        
+        
         //LOAD NEWS here
-        news.add(new News("ciaoooo", 700, 300, "#000000", "TimesRoman", Font.PLAIN, 60)); 
-        news.add(new News("test", 700, 500, "#600ff0", "TimesRoman", Font.PLAIN, 60));
+        news.add(new News("ciaoooooooooooooo", "#000000", "TimesRoman", Font.PLAIN, 60)); 
+        news.add(new News("test", "#600ff0", "TimesRoman", Font.PLAIN, 60));
+        news.add(new News("prova", "#600ff0", "TimesRoman", Font.PLAIN, 60));
+        news.add(new News("prova2", "#600ff0", "TimesRoman", Font.PLAIN, 60));
+        news.add(new News("prova3", "#600ff0", "TimesRoman", Font.PLAIN, 60));
+        news.add(new News("prova4", "#600ff0", "TimesRoman", Font.PLAIN, 60));
         
         
         
         
+        
+        
+        //Set up news on screen
+        if(news.isEmpty()){
+            System.err.print("No news found!");
+            return;
+        }
+        
+        this.newsNumber = news.size();  
+        int center = (boardSettings.getBoardSize().height / newsNumber) / 2;
+        for(int i = 0; i < news.size(); ++i){
+            news.get(i).setX(boardSettings.getBoardSize().width);
+            news.get(i).setY(center * ((i*2)+1));
+            //System.out.println(center * ((i*2)+1));
+        }
 
     }
     
@@ -123,6 +144,14 @@ public class Board extends JPanel implements Runnable {
    }
     
     
+    
+    
+    
+    
+    
+    
+    
+    
    
     private boolean allNewsEnded(){
         boolean result = true;
@@ -138,7 +167,8 @@ public class Board extends JPanel implements Runnable {
     private void restartNews(){
         for(int i = 0; i < news.size(); ++i){ 
             news.get(i).setEnd(false);
-            news.get(i).setX(boardSettings.getB_WIDTH());
+            news.get(i).setX(boardSettings.getBoardSize().width);
+            //System.out.println( news.get(i).getX());
         }  
         
     }

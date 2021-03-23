@@ -29,7 +29,7 @@ public class BoardSettings {
         
         backgroundColor = Color.decode("#808080");      //or --> new Color(80, 80, 80);
         
-        speed = 15;
+        speed = 5;
     }
     
     
