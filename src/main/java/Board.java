@@ -64,7 +64,8 @@ public class Board extends JPanel implements Runnable {
         news.add(new News("prova2", "#600ff0", "TimesRoman", Font.PLAIN, 40));
         news.add(new News("prova3", "#600ff0", "TimesRoman", Font.PLAIN, 80));
         news.add(new News("prova4", "#600ff0", "TimesRoman", Font.PLAIN, 60));
-        news.add(new News("prova5 aiushuasi auih gfasuaf uias  fasu hfaus fauif au", "#600ff0", "TimesRoman", Font.PLAIN, 4));
+        news.add(new News("prova5 aiushuasi auih gfasuaf uias  fasu hfaus fauif au", "#600ff0", "TimesRoman", Font.PLAIN, 40));
+
         
         
         
@@ -93,6 +94,7 @@ public class Board extends JPanel implements Runnable {
             
             try{
                 Thread.sleep(boardSettings.getSpeed());
+                //Thread.sleep(0, 1);
             }catch(InterruptedException ex){
                 
             }
@@ -123,7 +125,12 @@ public class Board extends JPanel implements Runnable {
             g.setColor(news.get(i).getColor());
             g.setFont(news.get(i).getFont());
             g.drawString(news.get(i).getText(), news.get(i).getX(), news.get(i).getY());
+            
+            
+            //Check the string size
             news.get(i).setWidth(g.getFontMetrics().stringWidth(news.get(i).getText()));
+            
+            
             //int width = g.getFontMetrics().stringWidth(a);
             //System.out.println(news.get(i).getWidth()); 
         }      

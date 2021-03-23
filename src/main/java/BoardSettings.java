@@ -31,7 +31,7 @@ public class BoardSettings {
         backgroundColor1 = Color.decode("#808080");      //or --> new Color(80, 80, 80);
         backgroundColor2 = Color.decode("#424242");      //or --> new Color(80, 80, 80);
         
-        speed = 5;
+        speed = 1;
     }
     
     
