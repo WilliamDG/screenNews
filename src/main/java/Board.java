@@ -1,4 +1,5 @@
 
+import com.google.gson.*;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ComponentAdapter;
@@ -54,12 +55,31 @@ public class Board extends JPanel implements Runnable {
         });
         
         
+
+
+
+        
+        
+        //JSON
+        GSon json = new GSon("settings.json");
+        //json.readStringsTestNoFile();
+        //json.readStringsTest();
+
+        /*String myJsonString = "{\"name\":\"john\",\"lastname\":\"smith\"}";
+        JsonParser parser = new JsonParser();
+        JsonElement element = parser.parse(myJsonString);
+        JsonObject jsonObject = element.getAsJsonObject();
+        String name = jsonObject.get("name").getAsString();
+        System.out.println(name);*/
+        
+
         
         
         
+     
         
         //LOAD NEWS here
-        news.add(new News("ciaoooooooooooooo", "#000000", "TimesRoman", Font.PLAIN, 20)); 
+        news.add(new News(json.readStringsTest(), "#000000", "TimesRoman", Font.PLAIN, 20)); 
         news.add(new News("prova1", "#600ff0", "TimesRoman", Font.PLAIN, 30));
         news.add(new News("prova2", "#600ff0", "TimesRoman", Font.PLAIN, 40));
         news.add(new News("prova3", "#600ff0", "TimesRoman", Font.PLAIN, 80));

@@ -1,0 +1,13 @@
+{
+    "userJson" : {
+		"id":1,
+		"name":"Luca",
+		"surname":"Santaniello",
+		"birtday":"Apr 6, 1981 12:00:00 AM"
+		
+    },
+	"strings": [
+		"Ciao come va",
+		"tutto bene"
+	]
+}
