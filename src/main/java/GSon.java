@@ -1,5 +1,6 @@
 
 import com.google.gson.*;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -17,10 +18,17 @@ import java.util.logging.Logger;
  * @author Will
  */
 public class GSon {
+    private String strFileName;
     private Path fileName;
     private String str;
     
+    public boolean isFileOk;
+    
     public GSon(String strFileName){
+        this.strFileName = strFileName;
+        this.isFileOk = false;
+        
+        
         //JSON
         try {
             fileName = Path.of(strFileName);
@@ -103,5 +111,30 @@ public class GSon {
         
         return output;
     }
+    
+    
+    
+    
+    public void createOrLoadFile(){
+        File file = new File(this.strFileName);
+        if( file.exists()){
+            System.out.println("Esiste");
+            this.isFileOk = true;
+        }
+        else{
+            try {
+                file.createNewFile();
+                System.out.println("NON Esiste");
+                this.isFileOk = true;
+            } 
+            catch (IOException e) {
+            }          
+            
+            
+        }
+    }
+    
+    
+    
     
 }

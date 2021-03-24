@@ -61,7 +61,7 @@ public class Board extends JPanel implements Runnable {
         
         
         //JSON
-        GSon json = new GSon("settings.json");
+        //GSon json = new GSon("settings.json");
         //json.readStringsTestNoFile();
         //json.readStringsTest();
 
@@ -79,7 +79,7 @@ public class Board extends JPanel implements Runnable {
      
         
         //LOAD NEWS here
-        news.add(new News(json.readStringsTest(), "#000000", "TimesRoman", Font.PLAIN, 20)); 
+        news.add(new News("ciaoooooooooooooooo", "#000000", "TimesRoman", Font.PLAIN, 20)); 
         news.add(new News("prova1", "#600ff0", "TimesRoman", Font.PLAIN, 30));
         news.add(new News("prova2", "#600ff0", "TimesRoman", Font.PLAIN, 40));
         news.add(new News("prova3", "#600ff0", "TimesRoman", Font.PLAIN, 80));

@@ -99,7 +99,7 @@
 
 
 
-            <!-- these create a jar without dependences, but put all dependences in a lib/ folder -->
+            <!-- these 2 create a jar without dependences, but put all dependences in a lib/ folder -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -125,7 +125,7 @@
                             <goal>copy-dependencies</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                            <outputDirectory>${project.build.directory}/lib</outputDirectory>                           
                             <overWriteReleases>false</overWriteReleases>
                             <overWriteSnapshots>false</overWriteSnapshots>
                             <overWriteIfNewer>true</overWriteIfNewer>

@@ -40,7 +40,21 @@ public class Start extends JFrame implements KeyListener{
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        
+        String fileName = "settings.json";
+        GSon json = new GSon(fileName);
+        json.createOrLoadFile();
+        if(!json.isFileOk){
+            System.err.print("Error with " + fileName);
+            return;
+        }
+        
+        
+
+        
+        
+        
+        
         
         JFrame jf = new Start();
         //jf.setExtendedState(JFrame.MAXIMIZED_BOTH); 
@@ -56,8 +70,6 @@ public class Start extends JFrame implements KeyListener{
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
    
-        //System.out.println("TEST");
-        //System.out.println("TEST");
     }
 
     @Override
@@ -71,7 +83,7 @@ public class Start extends JFrame implements KeyListener{
     @Override
     public void keyReleased(KeyEvent e) {
         if(e.getKeyCode() == KeyEvent.VK_F){
-            System.out.println("FULL SCREEN");
+            //System.out.println("FULL SCREEN");
             
             this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
             //this.setLocationRelativeTo(null);
@@ -80,7 +92,7 @@ public class Start extends JFrame implements KeyListener{
             this.setVisible(true); 
         }
         else if(e.getKeyCode() == KeyEvent.VK_ESCAPE){
-            System.out.println("Normal SCREEN");
+            //System.out.println("Normal SCREEN");
             
             this.setExtendedState(JFrame.NORMAL); 
             //this.setLocationRelativeTo(null);
