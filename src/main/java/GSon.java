@@ -255,7 +255,7 @@ public class GSon {
     }
     
     public int getNewsFontSize(int i){
-        int output = 20;
+        int output = 60;
         
         try{
             JsonParser parser = new JsonParser();
