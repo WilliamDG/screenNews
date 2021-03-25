@@ -269,8 +269,7 @@ public class GSon {
         catch(Exception ex){  
         } 
         return output;
-    }
-    
+    }    
     
     public String getSettingsBackGround(int i){
         String output = "#123123";
