@@ -103,12 +103,6 @@ public class Board extends JPanel implements Runnable {
         
         
         
-        //
-        if(1==2)
-        {
-            
-        }
-        
         //Set up news on screen
         if(news.isEmpty()){
             System.err.print("No news found!");
