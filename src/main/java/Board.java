@@ -1,9 +1,11 @@
 
 import com.google.gson.*;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.io.File;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 
@@ -26,16 +28,19 @@ public class Board extends JPanel implements Runnable {
     private int newsNumber;
     private int newsCenter;
     
+    private GSon json;
     
-    public Board(BoardSettings bs){
+    public Board(BoardSettings bs, GSon json){
 
         this.boardSettings = bs;
+        this.json = json;
         
         // boardSettings.getB
        
         setBackground(boardSettings.getBackgroundColor1()); 
         setPreferredSize(boardSettings.getBoardSize());
         
+
         
         boardThread = new Thread(this);
         boardThread.setPriority(Thread.MAX_PRIORITY);
@@ -55,37 +60,46 @@ public class Board extends JPanel implements Runnable {
         });
         
         
-
-
-
         
+      
+        //////////////////////////////////
+        //              JSON            //
+        //////////////////////////////////
         
-        //JSON
-        //GSon json = new GSon("settings.json");
-        //json.readStringsTestNoFile();
-        //json.readStringsTest();
-
-        /*String myJsonString = "{\"name\":\"john\",\"lastname\":\"smith\"}";
-        JsonParser parser = new JsonParser();
-        JsonElement element = parser.parse(myJsonString);
-        JsonObject jsonObject = element.getAsJsonObject();
-        String name = jsonObject.get("name").getAsString();
-        System.out.println(name);*/
+        /*System.out.println("News count: " + json.getNewsNumber());
+        System.out.println(json.getNewsText(1));
+        System.out.println(json.getNewsColor(1));
+        System.out.println(json.getNewsFontName(1));
+        System.out.println(json.getNewsFontType(1));
+        System.out.println(json.getNewsFontSize(1));
+        System.out.println(json.getSettingsBackGround(1));
+        System.out.println(json.getSettingsSpeed());*/
         
-
-        
-        
-        
-     
+        //LOAD Settings here
+        this.boardSettings.setBackgroundColor1(Color.decode(json.getSettingsBackGround(1)));
+        this.boardSettings.setBackgroundColor2(Color.decode(json.getSettingsBackGround(2)));
+        this.boardSettings.setSpeed(json.getSettingsSpeed());
         
         //LOAD NEWS here
-        news.add(new News("ciaoooooooooooooooo", "#000000", "TimesRoman", Font.PLAIN, 20)); 
+        int newsCount = json.getNewsNumber();
+        for(int i = 1; i <= newsCount; ++i){
+            news.add(new News(
+                    json.getNewsText(i), 
+                    json.getNewsColor(i), 
+                    json.getNewsFontName(i), 
+                    json.getNewsFontType(i), 
+                    json.getNewsFontSize(i)
+            ));
+        }
+        
+        //Load news manually
+        /*news.add(new News(this.json.getStr(), "#000000", "TimesRoman", Font.PLAIN, 20)); 
         news.add(new News("prova1", "#600ff0", "TimesRoman", Font.PLAIN, 30));
         news.add(new News("prova2", "#600ff0", "TimesRoman", Font.PLAIN, 40));
         news.add(new News("prova3", "#600ff0", "TimesRoman", Font.PLAIN, 80));
         news.add(new News("prova4", "#600ff0", "TimesRoman", Font.PLAIN, 60));
         news.add(new News("prova5 aiushuasi auih gfasuaf uias  fasu hfaus fauif au", "#600ff0", "TimesRoman", Font.PLAIN, 40));
-
+        */
         
         
         
@@ -100,6 +114,9 @@ public class Board extends JPanel implements Runnable {
         
         setUpStrings(); //Called here and on Screen Resize Listener
 
+        
+        
+        
 
     }
     

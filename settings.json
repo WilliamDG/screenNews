@@ -1,0 +1,25 @@
+{
+	"settings" : {
+		"backgroundColor1": 	"#123456",
+		"backgroundColor2": 	"#ff5588",
+		"speed": 				1
+	},
+	"news" : {
+		"1" : {
+			"text" : 			"My 1st news",
+			"color" : 			"#ffffff",
+			"font_name" : 		"TimesRoman",
+			"font_type" : 		1,
+			"font_size" : 		60
+		},
+		"2" : {
+			"text" : 			"My 2nd news"
+		},
+		"3" : {
+			"text" : 			"My 3nd news"
+		},
+		"4" : {
+			"text" : 			"My 4nd news"
+		}
+	}
+}

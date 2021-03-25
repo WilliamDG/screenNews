@@ -16,12 +16,14 @@ import javax.swing.JFrame;
 public class Start extends JFrame implements KeyListener{
     
     private BoardSettings boardSettings;
+    private GSon json;
     
-    public Start(){
+    public Start(GSon json){
+        this.json = json;
         
         boardSettings = new BoardSettings();
         
-        Board b = new Board(boardSettings);
+        Board b = new Board(boardSettings, this.json);
         this.add(b);
         
         
@@ -43,7 +45,7 @@ public class Start extends JFrame implements KeyListener{
         
         String fileName = "settings.json";
         GSon json = new GSon(fileName);
-        json.createOrLoadFile();
+        json.checkFile();
         if(!json.isFileOk){
             System.err.print("Error with " + fileName);
             return;
@@ -56,7 +58,7 @@ public class Start extends JFrame implements KeyListener{
         
         
         
-        JFrame jf = new Start();
+        JFrame jf = new Start(json);
         //jf.setExtendedState(JFrame.MAXIMIZED_BOTH); 
         //jf.setLocationRelativeTo(null); 
         //jf.setUndecorated(true);
