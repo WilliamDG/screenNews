@@ -1,6 +1,6 @@
 # Screen News
 🔥 A simple Java software that read a custom number of news from a json file and print them to the screen.
-![preview](https://user-images.githubusercontent.com/22510306/112407026-9810ce80-8d15-11eb-9d9d-043e07454e38.png)
+![preview](https://user-images.githubusercontent.com/22510306/112407026-9810ce80-8d15-11eb-9d9d-043e07454e38.png 100x100)
 
 
 # How to use it:
