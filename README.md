@@ -8,10 +8,10 @@
 
 
 # How to use it:
-<br />✔️ start it
-<br />✔️ edit the "settings.json" file with your cusom settings (if you leave them empty, the default values are taken as in the examples file auto-created)
-<br />✔️ press " f " to full screen end " ESC " to quit full screen mode
-<br />✔️ enjoy it!
+<br />✔️ Start it
+<br />✔️ Rdit the "settings.json" file with your cusom settings (if you leave them empty, the default values are taken as in the examples file auto-created)
+<br />✔️ Press " f " to full screen end " ESC " to quit full screen mode
+<br />✔️ Rnjoy it!
 
 
 <br /><br />
