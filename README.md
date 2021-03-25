@@ -1,4 +1,4 @@
-# screenNews
+# Screen News
 
 🔥 A simple Java software that read a custom number of news from a json file and print them to the screen.
 
