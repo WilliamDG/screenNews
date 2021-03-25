@@ -1,5 +1,4 @@
 # Screen News
-
 🔥 A simple Java software that read a custom number of news from a json file and print them to the screen.
 
 # How to use it:
@@ -11,6 +10,7 @@
 
 
 
-TODO:
-
+# TODO:
+1. Show images after some screen repeat
+2. Add menu to change/modify "settings.json"
 
