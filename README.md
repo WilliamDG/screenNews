@@ -4,7 +4,7 @@
 ![preview](https://user-images.githubusercontent.com/22510306/112407026-9810ce80-8d15-11eb-9d9d-043e07454e38.png)
 
 
-![](https://gyazo.com/eb5c5741b6a9a16c692170a41a49c858.png =25x25)
+![](https://gyazo.com/eb5c5741b6a9a16c692170a41a49c858.png)
 
 
 # How to use it:
