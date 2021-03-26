@@ -16,10 +16,13 @@
 			"text" : 			"My 2nd news"
 		},
 		"3" : {
-			"text" : 			"My 3nd news"
+			"text" : 			"My 3rd news"
 		},
 		"4" : {
-			"text" : 			"My 4nd news"
+			"text" : 			"My 4th news"
+		},
+		"5" : {
+			"text" : 			"My 5th news"
 		}
 	}
 }

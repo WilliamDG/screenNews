@@ -1,6 +1,7 @@
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 import javax.swing.JFrame;
 
 /*
@@ -41,7 +42,7 @@ public class Start extends JFrame implements KeyListener{
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args){
         
         String fileName = "settings.json";
         GSon json = new GSon(fileName);

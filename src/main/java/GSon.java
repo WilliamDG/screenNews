@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
         
@@ -143,14 +144,16 @@ public class GSon {
     public void readFile(){
         //JSON
         try {
-            fileName = Path.of(strFileName);
+            //fileName = Path.of(strFileName);                  //Java 7
+            fileName = Paths.get(strFileName);                  //Java 8
         }
         catch(Exception ex){
         }
         
         try {
-            str = Files.readString(fileName);
-            //System.out.println(str);
+            //str = Files.readString(fileName);                 //Java 7
+            str = new String(Files.readAllBytes(fileName));     //Java 8
+            
         } catch (IOException ex) {
             Logger.getLogger(Board.class.getName()).log(Level.SEVERE, null, ex);
         }
