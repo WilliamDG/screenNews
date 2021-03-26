@@ -27,12 +27,22 @@ public class GSon {
     
     public boolean isFileOk;
     
+    private String defaultText;
+    private String defaultColor;
+    private String defaultFont_name;
+    private int defaultFont_type;
+    private int defaultFont_size;
+    
     public GSon(String strFileName){
         this.strFileName = strFileName;
         this.isFileOk = false;
 
         //readFile();
-        
+        defaultText =  "Error reading the news text";
+        defaultColor = "#000000";
+        defaultFont_name = "TimesRoman";
+        defaultFont_type = 0;   // 0 - PLAIN        1 - BOLD        2 - ITALIC
+        defaultFont_size = 60;
     }
 
     
@@ -181,7 +191,7 @@ public class GSon {
     
     
     public String getNewsText(int i){
-        String output = "Error reading the news text";
+        String output = this.defaultText;
         
         try{
             JsonParser parser = new JsonParser();
@@ -207,7 +217,7 @@ public class GSon {
     }
     
     public String getNewsColor(int i){
-        String output = "#000000";
+        String output = this.defaultColor;
         
         try{
             JsonParser parser = new JsonParser();
@@ -224,7 +234,7 @@ public class GSon {
     }
     
     public String getNewsFontName(int i){
-        String output = "TimesRoman";
+        String output = this.defaultFont_name;
         
         try{
             JsonParser parser = new JsonParser();
@@ -241,7 +251,7 @@ public class GSon {
     }
     
     public int getNewsFontType(int i){
-        int output = 0;
+        int output = this.defaultFont_type;
         
         try{
             JsonParser parser = new JsonParser();
@@ -258,7 +268,7 @@ public class GSon {
     }
     
     public int getNewsFontSize(int i){
-        int output = 60;
+        int output = this.defaultFont_size;
         
         try{
             JsonParser parser = new JsonParser();
