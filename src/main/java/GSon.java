@@ -26,12 +26,19 @@ public class GSon {
     private String str;
     
     public boolean isFileOk;
-    
+
     private String defaultText;
     private String defaultColor;
     private String defaultFont_name;
     private int defaultFont_type;
     private int defaultFont_size;
+    
+    
+    
+    //
+    
+    
+    
     
     public GSon(String strFileName){
         this.strFileName = strFileName;

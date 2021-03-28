@@ -20,9 +20,10 @@ public class News {
     private int height;
       
     private String text;
-    
     private Color color;
     private Font font;
+    
+    
     
     private boolean end;
     
