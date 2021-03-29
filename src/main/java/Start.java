@@ -18,13 +18,15 @@ public class Start extends JFrame implements KeyListener{
     
     private BoardSettings boardSettings;
     private GSon json;
+    private Images images;
     
-    public Start(GSon json){
+    public Start(GSon json, Images images){
         this.json = json;
+        this.images = images;
         
         boardSettings = new BoardSettings();
         
-        Board b = new Board(boardSettings, this.json);
+        Board b = new Board(boardSettings, this.json, this.images);
         this.add(b);
         
         
@@ -47,19 +49,22 @@ public class Start extends JFrame implements KeyListener{
         String fileName = "settings.json";
         GSon json = new GSon(fileName);
         json.checkFile();
-        if(!json.isFileOk){
+        if(!json.isIsFileOk()){
             System.err.print("Error with " + fileName);
             return;
         }
         
         
-
+        
+        String folderName = "imgs";
+        Images images = new Images(folderName);
+        images.checkFolder();
+        images.imagesLoad();
         
         
+        //System.out.println("test");
         
-        
-        
-        JFrame jf = new Start(json);
+        JFrame jf = new Start(json, images);
         //jf.setExtendedState(JFrame.MAXIMIZED_BOTH); 
         //jf.setLocationRelativeTo(null); 
         //jf.setUndecorated(true);

@@ -1,9 +1,19 @@
 
+import com.google.gson.Gson;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 /*
@@ -17,31 +27,34 @@ import javax.swing.JPanel;
  * @author Will
  */
 public class Board extends JPanel implements Runnable {
+
     private BoardSettings boardSettings;
     
     private Thread boardThread;
     
-    private ArrayList<News> news = new ArrayList<News>();
+    //private ArrayList<News> news = new ArrayList<News>();
     private int newsNumber;
     private int newsCenter;
+    private int newsCounter;
     
     private GSon json;
+    private Images images;
     
-    public Board(BoardSettings bs, GSon json){
+    public Board(BoardSettings bs, GSon json, Images images){
 
         this.boardSettings = bs;
         this.json = json;
+        this.images = images;
         
+        this.newsCounter = 0;
         // boardSettings.getB
        
-        setBackground(boardSettings.getBackgroundColor1()); 
+        //setBackground(boardSettings.getBackgroundColor1()); 
         setPreferredSize(boardSettings.getBoardSize());
         
 
         
-        boardThread = new Thread(this);
-        boardThread.setPriority(Thread.MAX_PRIORITY);
-        boardThread.start();
+
 
         
         //Board Size listner 
@@ -62,47 +75,16 @@ public class Board extends JPanel implements Runnable {
         //////////////////////////////////
         //              JSON            //
         //////////////////////////////////
-        
-        /*System.out.println("News count: " + json.getNewsNumber());
-        System.out.println(json.getNewsText(1));
-        System.out.println(json.getNewsColor(1));
-        System.out.println(json.getNewsFontName(1));
-        System.out.println(json.getNewsFontType(1));
-        System.out.println(json.getNewsFontSize(1));
-        System.out.println(json.getSettingsBackGround(1));
-        System.out.println(json.getSettingsSpeed());*/
-        
-        //LOAD Settings here
-        this.boardSettings.setBackgroundColor1(Color.decode(json.getSettingsBackGround(1)));
-        this.boardSettings.setBackgroundColor2(Color.decode(json.getSettingsBackGround(2)));
-        this.boardSettings.setSpeed(json.getSettingsSpeed());
-        
         //LOAD NEWS here
-        int newsCount = json.getNewsNumber();
-        for(int i = 1; i <= newsCount; ++i){
-            news.add(new News(
-                    json.getNewsText(i), 
-                    json.getNewsColor(i), 
-                    json.getNewsFontName(i), 
-                    json.getNewsFontType(i), 
-                    json.getNewsFontSize(i)
-            ));
-        }
-        
-        //Load news manually
-        /*news.add(new News(this.json.getStr(), "#000000", "TimesRoman", Font.PLAIN, 20)); 
-        news.add(new News("prova1", "#600ff0", "TimesRoman", Font.PLAIN, 30));
-        news.add(new News("prova2", "#600ff0", "TimesRoman", Font.PLAIN, 40));
-        news.add(new News("prova3", "#600ff0", "TimesRoman", Font.PLAIN, 80));
-        news.add(new News("prova4", "#600ff0", "TimesRoman", Font.PLAIN, 60));
-        news.add(new News("prova5 aiushuasi auih gfasuaf uias  fasu hfaus fauif au", "#600ff0", "TimesRoman", Font.PLAIN, 40));
-        */
+        json.readJsonAndLoadIt();       
         
         
+
         
         //Set up news on screen
-        if(news.isEmpty()){
+        if(json.getNews().isEmpty()){
             System.err.print("No news found!");
+            //boardThread = null;
             return;
         }
         
@@ -111,7 +93,9 @@ public class Board extends JPanel implements Runnable {
         
         
         
-
+        boardThread = new Thread(this);
+        boardThread.setPriority(Thread.MAX_PRIORITY);
+        boardThread.start();                                                                //start the thread at the end
     }
     
     
@@ -121,15 +105,33 @@ public class Board extends JPanel implements Runnable {
     @Override
     public void run() {
         while(true){
-            move();
             
-            try{
-                Thread.sleep(boardSettings.getSpeed());
-                //Thread.sleep(0, 1);
-            }catch(InterruptedException ex){
-                
+            System.out.println(images.getCurrentImageNumber());
+            
+            if(this.getNewsCounter() < json.getNewsCycleCount()){                           //News
+                move();                                                             
+                try{
+                    Thread.sleep(json.getSpeed());
+                }catch(InterruptedException ex){}      
             }
-            repaint();       
+            else{                                                                           //Images
+                                                                 
+                if(images.getCurrentImageNumber() >= images.getImagesCount()){
+                    setNewsCounter(0); 
+                    images.setCurrentImageNumber(0);
+                    continue;
+                }                    
+                else{    
+                    try{
+                        Thread.sleep(json.getImagesSpeed());
+                    }catch(InterruptedException ex){} 
+                    
+                }
+                images.setCurrentImageNumber(images.getCurrentImageNumber()+1);
+            }
+            
+            
+            repaint();  
         }
     }
     
@@ -138,45 +140,56 @@ public class Board extends JPanel implements Runnable {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         
-        if(news.isEmpty())
-            return;
-            
-        for(int i = 0; i < news.size(); ++i){
-            
-            if(i%2 == 0){
-                g.setColor(boardSettings.getBackgroundColor1());
-                g.fillRect(0, newsCenter * ((i*2)+1)-newsCenter, boardSettings.getBoardSize().width, newsCenter * ((i*2)+1)+newsCenter);
+        if(this.getNewsCounter() < json.getNewsCycleCount()){  //show news
+            if(json.getNews().isEmpty())
+                return;
+
+            for(int i = 0; i < json.getNews().size(); ++i){
+
+                if(i%2 == 0){
+                    g.setColor(Color.decode(json.getBackgroundColor1()));
+                    g.fillRect(0, newsCenter * ((i*2)+1)-newsCenter, boardSettings.getBoardSize().width, newsCenter * ((i*2)+1)+newsCenter);
+                }
+                else{
+                    g.setColor(Color.decode(json.getBackgroundColor2()));
+                    g.fillRect(0, newsCenter * ((i*2)+1)-newsCenter, boardSettings.getBoardSize().width, newsCenter * ((i*2)+1)+newsCenter);
+                }
+
+
+                g.setColor(json.getNews().get(i).getColor());
+                g.setFont(json.getNews().get(i).getFont());
+                g.drawString(json.getNews().get(i).getText(), json.getNews().get(i).getX(), json.getNews().get(i).getY());
+
+
+                //Check the string size
+                json.getNews().get(i).setWidth(g.getFontMetrics().stringWidth(json.getNews().get(i).getText()));
+
             }
-            else{
-                g.setColor(boardSettings.getBackgroundColor2());
-                g.fillRect(0, newsCenter * ((i*2)+1)-newsCenter, boardSettings.getBoardSize().width, newsCenter * ((i*2)+1)+newsCenter);
-            }
-            
-            
-            g.setColor(news.get(i).getColor());
-            g.setFont(news.get(i).getFont());
-            g.drawString(news.get(i).getText(), news.get(i).getX(), news.get(i).getY());
-            
-            
-            //Check the string size
-            news.get(i).setWidth(g.getFontMetrics().stringWidth(news.get(i).getText()));
-            
-            
-            //int width = g.getFontMetrics().stringWidth(a);
-            //System.out.println(news.get(i).getWidth()); 
-        }      
+        }
+        else    //show images
+        {
+            //BufferedImage image = null;
+            //try {
+                //image = ImageIO.read(new File("imgs\\wallpaper2.jpg"));
+                //BufferedImage resizedImage = new BufferedImage(boardSettings.getBoardSize().width, boardSettings.getBoardSize().height, image.TYPE_INT_RGB);
+                //g.drawImage(image, 0, 0, boardSettings.getBoardSize().width, boardSettings.getBoardSize().height, this);
+                //System.out.println(images.getImagesArray().get(0).toString());
+            //} catch (IOException ex) {}
+            if(images.getCurrentImageNumber() < images.getImagesCount())
+                g.drawImage(images.getImagesArray().get(images.getCurrentImageNumber()), 0, 0, boardSettings.getBoardSize().width, boardSettings.getBoardSize().height, this);
+        }
     }
     
     
     
     public void move(){
-        if(news.isEmpty())
+        if(json.getNews().isEmpty())
             return;
             
-        for(int i = 0; i < news.size(); ++i){    
-            news.get(i).setX(news.get(i).getX()-1);
-            if(news.get(i).getX() + news.get(i).getWidth() <= 0){
-                news.get(i).setEnd(true);
+        for(int i = 0; i < json.getNews().size(); ++i){    
+            json.getNews().get(i).setX(json.getNews().get(i).getX()-1);
+            if(json.getNews().get(i).getX() + json.getNews().get(i).getWidth() <= 0){
+                json.getNews().get(i).setEnd(true);
                 //System.out.println("Stringa " + i + " FINITA");
                 
             }
@@ -184,6 +197,7 @@ public class Board extends JPanel implements Runnable {
         if(allNewsEnded())
             restartNews();
         //System.out.println(allNewsEnded());
+        
         
    }
     
@@ -200,8 +214,8 @@ public class Board extends JPanel implements Runnable {
     private boolean allNewsEnded(){
         boolean result = true;
        
-        for(int i = 0; i < news.size(); ++i){ 
-            if(!news.get(i).isEnd())
+        for(int i = 0; i < json.getNews().size(); ++i){ 
+            if(!json.getNews().get(i).isEnd())
                result = false; 
         }   
        
@@ -209,23 +223,59 @@ public class Board extends JPanel implements Runnable {
     }
    
     private void restartNews(){
-        for(int i = 0; i < news.size(); ++i){ 
-            news.get(i).setEnd(false);
-            news.get(i).setX(boardSettings.getBoardSize().width);
+        for(int i = 0; i < json.getNews().size(); ++i){ 
+            json.getNews().get(i).setEnd(false);
+            json.getNews().get(i).setX(boardSettings.getBoardSize().width);
             //System.out.println( news.get(i).getX());
         }  
+        this.setNewsCounter(this.getNewsCounter() + 1);
         return;
     }
     
     private void setUpStrings(){
-        this.newsNumber = news.size();  
+        
+        if(json.getNews().isEmpty())
+            return;
+        
+        this.newsNumber = json.getNews().size();  
         this.newsCenter = (boardSettings.getBoardSize().height / newsNumber) / 2;
-        for(int i = 0; i < news.size(); ++i){
-            news.get(i).setX(boardSettings.getBoardSize().width);
+        for(int i = 0; i < json.getNews().size(); ++i){
+            json.getNews().get(i).setX(boardSettings.getBoardSize().width);
             //news.get(i).setY(newsCenter * ((i*2)+1));
-            news.get(i).setY(newsCenter * ((i*2)+1) + news.get(i).getFont().getSize()/4);       //FontSize / 4 ---> Center the string in Y axis
+            json.getNews().get(i).setY(newsCenter * ((i*2)+1) + json.getNews().get(i).getFont().getSize()/4);       //FontSize / 4 ---> Center the string in Y axis
         }
         return;
     }
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /**
+     * @return the newsCounter
+     */
+    public int getNewsCounter() {
+        return newsCounter;
+    }
+
+    /**
+     * @param newsCounter the newsCounter to set
+     */
+    public void setNewsCounter(int newsCounter) {
+        this.newsCounter = newsCounter;
+    }
 }

@@ -1,28 +1,21 @@
 {
 	"settings" : {
-		"backgroundColor1": 	"#123456",
-		"backgroundColor2": 	"#ff5588",
-		"speed": 				1
+		"backgroundColor1": 	"#808080",
+		"backgroundColor2": 	"#424242",
+		"speed": 				1,
+		"newsCycleCount": 			3,
+		"imagesSpeed": 			2000
 	},
 	"news" : {
 		"1" : {
 			"text" : 			"My 1st news",
 			"color" : 			"#ffffff",
 			"font_name" : 		"TimesRoman",
-			"font_type" : 		1,
+			"font_type" : 		0,
 			"font_size" : 		60
 		},
 		"2" : {
 			"text" : 			"My 2nd news"
-		},
-		"3" : {
-			"text" : 			"My 3rd news"
-		},
-		"4" : {
-			"text" : 			"My 4th news"
-		},
-		"5" : {
-			"text" : 			"My 5th news"
 		}
 	}
 }
