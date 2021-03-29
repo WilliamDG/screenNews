@@ -34,6 +34,7 @@ public class Start extends JFrame implements KeyListener{
         setFocusable(true);
         requestFocusInWindow();
         addKeyListener(this);
+        
     }
     
     
