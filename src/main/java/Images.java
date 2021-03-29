@@ -67,7 +67,7 @@ public class Images {
          
     }
     
-    public void imagesLoad(){
+    public void imagesLoad(ProgressBar it){
         try{
             imagesList = Files.list(folderNamePath)
                     .filter(Files::isRegularFile)                   //f -> f.toFile().isFile()
@@ -79,10 +79,10 @@ public class Images {
         //System.out.println(imagesList.get(1).toString());
         //System.out.println(folderNamePath.toString());
         
-        imagesLoadArray();
+        imagesLoadArray(it);
     }
     
-    public void imagesLoadArray(){
+    public void imagesLoadArray(ProgressBar it){
         
         for(int i = 0; i < getImagesCount(); i++){
             
@@ -90,6 +90,7 @@ public class Images {
                 //System.out.println("start");
                 getImagesArray().add(ImageIO.read(new File(folderName + "\\" + imagesList.get(i).toString())));
                 //System.out.println("load");
+                it.setCurrentValue(it.getCurrentValue()+1);
             }
             catch(Exception ex){} 
         }

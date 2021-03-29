@@ -1,7 +1,9 @@
 
 import com.google.gson.Gson;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Toolkit;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.image.BufferedImage;
@@ -52,6 +54,7 @@ public class Board extends JPanel implements Runnable {
         //setBackground(boardSettings.getBackgroundColor1()); 
         setPreferredSize(boardSettings.getBoardSize());
         
+
 
         
 
@@ -106,7 +109,7 @@ public class Board extends JPanel implements Runnable {
     public void run() {
         while(true){
             
-            System.out.println(images.getCurrentImageNumber());
+            //System.out.println(images.getCurrentImageNumber());
             
             if(this.getNewsCounter() < json.getNewsCycleCount()){                           //News
                 move();                                                             
